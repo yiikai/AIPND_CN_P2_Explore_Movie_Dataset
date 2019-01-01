@@ -193,20 +193,34 @@ movie_data['popularity'].groupby(movie_data['director']).agg('mean').sort_values
 
 # **任务3.1：**对 `popularity` 最高的20名电影绘制其 `popularity` 值。
 
-# In[ ]:
+# In[89]:
 
 
 base_color = sb.color_palette()[0]
+pop_data = movie_data['popularity'].sort_values(ascending=False)[0:20]
+index = pop_data.index
+newdata = movie_data.iloc[index]
+movie_name = newdata['original_title']
 
-sb.countplot(data=movie_data,x="original_title",color=base_color)
+plt.bar(range(len(movie_name)), pop_data,color=base_color,tick_label=movie_name);
+plt.xticks(rotation=90);
 
 
 # **任务3.2：**分析电影净利润（票房-成本）随着年份变化的情况，并简单进行分析。
 
-# In[ ]:
+# In[117]:
 
 
+gp = movie_data[['release_year','budget','revenue']].groupby(movie_data['release_year'])
+year = []
+count = []
+for name, group in gp:
+        year.append(name)
+        count.append((group['revenue'] - group['budget']).sum())
+plt.bar(range(len(year)), count,color=base_color,tick_label=year);
+plt.xticks(rotation=90);
 
+#随着年份的增加，利润是稳步上涨的
 
 
 # ---
