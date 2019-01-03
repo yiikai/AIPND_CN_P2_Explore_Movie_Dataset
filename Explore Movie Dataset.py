@@ -37,7 +37,7 @@
 # 
 # 提示：记得使用 notebook 中的魔法指令 `%matplotlib inline`，否则会导致你接下来无法打印出图像。
 
-# In[31]:
+# In[77]:
 
 
 import numpy as np
@@ -63,7 +63,7 @@ print(movie_data.describe())
 # 
 # 
 
-# In[32]:
+# In[78]:
 
 
 #row and column
@@ -81,7 +81,7 @@ print(movie_data.sample())
 print("==============dtypes==============")
 print(movie_data.dtypes)
 print("==============isnull==============")
-print(movie_data.isnull().sum())
+print(movie_data.isnull().any())
 print("==============describe==============")
 print(movie_data.describe())
 
@@ -94,7 +94,7 @@ print(movie_data.describe())
 # 
 # 任务：使用适当的方法来清理空值，并将得到的数据保存。
 
-# In[33]:
+# In[79]:
 
 
 clean_data = movie_data.fillna('ffill')
@@ -123,7 +123,7 @@ print(clean_data.isnull().sum())
 # 
 # 要求：每一个语句只能用一行代码实现。
 
-# In[34]:
+# In[80]:
 
 
 movie_data['id']
@@ -135,7 +135,7 @@ movie_data['vote_average']
 movie_data.head(20)
 movie_data.iloc[47]
 movie_data.iloc[48]
-movie_data['popularity'][50:61]
+movie_data['popularity'][49:60]
 
 
 # ---
@@ -149,7 +149,7 @@ movie_data['popularity'][50:61]
 # 
 # 要求：请使用 Logical Indexing实现。
 
-# In[35]:
+# In[81]:
 
 
 movie_data[movie_data['popularity'] > 5]
@@ -165,7 +165,7 @@ movie_data[(movie_data['popularity'] > 5) & (movie_data['release_year'] > 1996)]
 # 
 # 要求：使用 `Groupby` 命令实现。
 
-# In[36]:
+# In[82]:
 
 
 #movie_data['revenue'].groupby(movie_data['release_year']).agg('mean')
@@ -193,32 +193,35 @@ movie_data['popularity'].groupby(movie_data['director']).agg('mean').sort_values
 
 # **任务3.1：**对 `popularity` 最高的20名电影绘制其 `popularity` 值。
 
-# In[89]:
+# In[83]:
 
 
 base_color = sb.color_palette()[0]
-pop_data = movie_data['popularity'].sort_values(ascending=False)[0:20]
-index = pop_data.index
-newdata = movie_data.iloc[index]
-movie_name = newdata['original_title']
+# pop_data = movie_data['popularity'].sort_values(ascending=False)[0:20]
+# index = pop_data.index
+# newdata = movie_data.iloc[index]
+# movie_name = newdata['original_title']
 
-plt.bar(range(len(movie_name)), pop_data,color=base_color,tick_label=movie_name);
-plt.xticks(rotation=90);
+# plt.bar(range(len(movie_name)), pop_data,color=base_color,tick_label=movie_name);
+# plt.xticks(rotation=90);
+movie_data.sort_values('popularity', ascending=False).head(20).   plot(kind='barh', y='popularity', x='original_title', legend=False,color=base_color)
+plt.xlabel('popularity')
 
 
 # **任务3.2：**分析电影净利润（票房-成本）随着年份变化的情况，并简单进行分析。
 
-# In[117]:
+# In[84]:
 
 
 gp = movie_data[['release_year','budget','revenue']].groupby(movie_data['release_year'])
+print(gp.head())
 year = []
 count = []
 for name, group in gp:
         year.append(name)
-        count.append((group['revenue'] - group['budget']).sum())
-plt.bar(range(len(year)), count,color=base_color,tick_label=year);
-plt.xticks(rotation=90);
+        count.append((group['revenue'] - group['budget']).mean())
+
+plt.errorbar(x=year,y=count,color=base_color,fmt='b-');
 
 #随着年份的增加，利润是稳步上涨的
 
@@ -227,20 +230,37 @@ plt.xticks(rotation=90);
 # 
 # **[选做]任务3.3：**选择最多产的10位导演（电影数量最多的），绘制他们排行前3的三部电影的票房情况，并简要进行分析。
 
-# In[ ]:
+# In[85]:
 
 
+d_m = movie_data['original_title'].groupby(movie_data['director'])
+top_10 = d_m.count().sort_values(ascending=False).head(10)
+print(top_10)
+director = top_10.index
+revenue = []
+for d in director:
+    revenue.append(movie_data[movie_data['director'] == d]['revenue'].mean())
+top_df = pd.DataFrame(data=revenue,columns=['revenue'],index=director)
+print(top_df)
+base_color = sb.color_palette()[0]
+top_df.plot(kind='barh',legend=False,color=base_color)
 
+#从表中可以看出并不是电影数量越高票房越高， 要看平均票房
 
 
 # ---
 # 
 # **[选做]任务3.4：**分析1968年~2015年六月电影的数量的变化。
 
-# In[ ]:
+# In[99]:
 
 
 
+new_data = movie_data[(movie_data['release_year'] >= 1968) & (movie_data['release_year'] <= 2015 & )]
+tmp = new_data[['release_year','release_date','original_title']].groupby(new_data['release_year'])
+print(tmp.head())
+
+        
 
 
 # ---
