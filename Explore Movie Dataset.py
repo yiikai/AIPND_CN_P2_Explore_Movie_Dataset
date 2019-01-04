@@ -37,7 +37,7 @@
 # 
 # 提示：记得使用 notebook 中的魔法指令 `%matplotlib inline`，否则会导致你接下来无法打印出图像。
 
-# In[77]:
+# In[25]:
 
 
 import numpy as np
@@ -63,7 +63,7 @@ print(movie_data.describe())
 # 
 # 
 
-# In[78]:
+# In[26]:
 
 
 #row and column
@@ -94,7 +94,7 @@ print(movie_data.describe())
 # 
 # 任务：使用适当的方法来清理空值，并将得到的数据保存。
 
-# In[79]:
+# In[27]:
 
 
 clean_data = movie_data.fillna('ffill')
@@ -123,7 +123,7 @@ print(clean_data.isnull().sum())
 # 
 # 要求：每一个语句只能用一行代码实现。
 
-# In[80]:
+# In[28]:
 
 
 movie_data['id']
@@ -133,9 +133,8 @@ movie_data['runtime']
 movie_data['vote_average']
 
 movie_data.head(20)
-movie_data.iloc[47]
-movie_data.iloc[48]
-movie_data['popularity'][49:60]
+movie_data.iloc[[x for x in range(20),47,48]]
+# movie_data['popularity'][49:60]
 
 
 # ---
@@ -149,7 +148,7 @@ movie_data['popularity'][49:60]
 # 
 # 要求：请使用 Logical Indexing实现。
 
-# In[81]:
+# In[29]:
 
 
 movie_data[movie_data['popularity'] > 5]
@@ -165,7 +164,7 @@ movie_data[(movie_data['popularity'] > 5) & (movie_data['release_year'] > 1996)]
 # 
 # 要求：使用 `Groupby` 命令实现。
 
-# In[82]:
+# In[30]:
 
 
 #movie_data['revenue'].groupby(movie_data['release_year']).agg('mean')
@@ -193,7 +192,7 @@ movie_data['popularity'].groupby(movie_data['director']).agg('mean').sort_values
 
 # **任务3.1：**对 `popularity` 最高的20名电影绘制其 `popularity` 值。
 
-# In[83]:
+# In[31]:
 
 
 base_color = sb.color_palette()[0]
@@ -210,19 +209,14 @@ plt.xlabel('popularity')
 
 # **任务3.2：**分析电影净利润（票房-成本）随着年份变化的情况，并简单进行分析。
 
-# In[84]:
+# In[32]:
 
 
-gp = movie_data[['release_year','budget','revenue']].groupby(movie_data['release_year'])
-print(gp.head())
-year = []
-count = []
-for name, group in gp:
-        year.append(name)
-        count.append((group['revenue'] - group['budget']).mean())
-
-plt.errorbar(x=year,y=count,color=base_color,fmt='b-');
-
+movie_data['profit'] = movie_data['revenue'] - movie_data['budget']
+y_mean = movie_data.groupby('release_year')['profit'].mean()
+plt.errorbar(x=y_mean.index,y=y_mean.values,color=base_color,fmt='b-');
+plt.xlabel('year')
+plt.ylabel('profit')
 #随着年份的增加，利润是稳步上涨的
 
 
@@ -230,7 +224,7 @@ plt.errorbar(x=year,y=count,color=base_color,fmt='b-');
 # 
 # **[选做]任务3.3：**选择最多产的10位导演（电影数量最多的），绘制他们排行前3的三部电影的票房情况，并简要进行分析。
 
-# In[85]:
+# In[33]:
 
 
 d_m = movie_data['original_title'].groupby(movie_data['director'])
@@ -252,7 +246,7 @@ top_df.plot(kind='barh',legend=False,color=base_color)
 # 
 # **[选做]任务3.4：**分析1968年~2015年六月电影的数量的变化。
 
-# In[99]:
+# In[34]:
 
 
 
