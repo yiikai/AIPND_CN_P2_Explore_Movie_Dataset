@@ -13403,29 +13403,23 @@ max     9767.000000      9.200000   2015.000000  4.250000e+08  2.827124e+09
 
 [5 rows x 21 columns]
 ==============sample==============
-        id    imdb_id  popularity    budget   revenue  \
-5348  9414  tt0120483     0.37438  20000000  13801755   
+         id    imdb_id  popularity  budget  revenue     original_title  \
+398  334028  tt3698558    0.277613       0        0  Some Kind Of Hate   
 
-                   original_title  \
-5348  The Man Who Knew Too Little   
+                                                  cast homepage  \
+398  Grace Phipps|Sierra McCormick|Lexi Atkins|Spen...      NaN   
 
-                                                   cast homepage   director  \
-5348  Bill Murray|Peter Gallagher|Joanne Whalley|Alf...      NaN  Jon Amiel   
+                director tagline     ...       \
+398  Adam Egypt Mortimer     NaN     ...        
 
-                                                tagline      ...       \
-5348  Heâ€™s on a mission so secret, even he doesnâ€...      ...        
+                                              overview runtime  genres  \
+398  When a troubled teen is subjected to severe bu...      82  Horror   
 
-                                               overview runtime  \
-5348  An American gets a ticket for an audience part...      97   
+                          production_companies release_date vote_count  \
+398  Caliber Media Company|Revek Entertainment       5/2/15         19   
 
-                            genres  \
-5348  Comedy|Thriller|Crime|Action   
-
-                                   production_companies release_date  \
-5348  Regency Enterprises|Taurus Films|Polar Product...     11/14/97   
-
-     vote_count  vote_average  release_year    budget_adj   revenue_adj  
-5348         64           6.5          1997  2.716921e+07  1.874914e+07  
+     vote_average  release_year  budget_adj  revenue_adj  
+398           3.9          2015         0.0          0.0  
 
 [1 rows x 21 columns]
 ==============dtypes==============
@@ -13603,7 +13597,7 @@ dtype: int64
 <span class="n">movie_data</span><span class="p">[</span><span class="s1">&#39;runtime&#39;</span><span class="p">]</span>
 <span class="n">movie_data</span><span class="p">[</span><span class="s1">&#39;vote_average&#39;</span><span class="p">]</span>
 
-<span class="n">ic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">21</span><span class="p">,</span> <span class="mi">47</span><span class="p">:</span><span class="mi">49</span><span class="p">]</span>
+<span class="n">ic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span> <span class="mi">47</span><span class="p">:</span><span class="mi">49</span><span class="p">]</span>
 <span class="n">movie_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">ic</span><span class="p">]</span>
 <span class="n">movie_data</span><span class="p">[</span><span class="s1">&#39;popularity&#39;</span><span class="p">][</span><span class="mi">49</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span>
 </pre></div>
@@ -15535,7 +15529,7 @@ Wes Craven         4.472590e+07
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a1a70b240&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1a1cefb7f0&gt;</pre>
 </div>
 
 </div>
@@ -15637,6 +15631,32 @@ Wes Craven         4.472590e+07
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 </div>
     </div>
   </div>

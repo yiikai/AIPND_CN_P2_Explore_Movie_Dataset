@@ -132,7 +132,7 @@ movie_data['budget']
 movie_data['runtime']
 movie_data['vote_average']
 
-ic = np.r_[1:21, 47:49]
+ic = np.r_[0:20, 47:49]
 movie_data.iloc[ic]
 movie_data['popularity'][49:60]
 
@@ -268,3 +268,15 @@ print(tmp.head())
 
 
 # > 注意: 当你写完了所有的代码，并且回答了所有的问题。你就可以把你的 iPython Notebook 导出成 HTML 文件。你可以在菜单栏，这样导出**File -> Download as -> HTML (.html)、Python (.py)** 把导出的 HTML、python文件 和这个 iPython notebook 一起提交给审阅者。
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
